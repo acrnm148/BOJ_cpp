@@ -1,21 +1,28 @@
-#include<iostream>
-#include<algorithm>
+#include <iostream>
+#include <algorithm>
+#include <vector>
 using namespace std;
-#define MAX 10002
-int main() {
-	int N, num;
-	int arr[MAX] = { 0, };
-	scanf("%d", &N);
-	for (int i = 1; i <= N; i++) {
-		scanf("%d", &num);
-		arr[num]++;
+
+int main()
+{
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+
+	int N, idx;
+	int cnt[10001] = {};
+	cin >> N;
+
+	for (int i = 1; i <= N; i++)
+	{
+		cin >> idx;
+		cnt[idx] += 1;
 	}
-	for (int i = 1; i <= 10000; i++) {
-		if (arr[i] > 0) {
-			while (arr[i] > 0) {
-				cout << i<<"\n";
-				arr[i]--;
-			}
+
+	for (int i = 1; i <= 10000; i++)
+	{
+		for (int j = 1; j <= cnt[i]; j++)
+		{
+			cout << i << "\n";
 		}
 	}
 }

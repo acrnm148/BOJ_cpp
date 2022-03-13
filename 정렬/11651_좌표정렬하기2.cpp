@@ -1,14 +1,35 @@
-#include<iostream>
-#include<algorithm>
-#include<vector>
-#pragma warning(disable: 4996)
+#include <iostream>
+#include <algorithm>
 using namespace std;
-int main(void) {
-	cin.sync_with_stdio(false);
+
+struct position
+{
+	int y, x;
+};
+
+bool compare(position now, position last)
+{
+	if(now.y > last.y) return false;
+	if(now.y == last.y && now.x > last.x) return false;
+	else return true;
+}
+
+int main()
+{
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	
 	int N;
-	scanf("%d", &N);
-	vector<pair<int, int>> vdot(N);
-	for (int i = 0; i < N; i++)scanf("%d %d", &vdot[i].second, &vdot[i].first);
-	sort(vdot.begin(), vdot.end());
-	for (int i = 0; i < N; i++) cout << vdot[i].second << " " << vdot[i].first << "\n";
+	cin >> N;
+	struct position arr[100001];
+
+	for (int i = 0; i < N; i++)
+	{
+		cin >> arr[i].x >> arr[i].y;
+	}
+
+	//정렬
+	sort(arr, arr+N, compare);
+
+	for(int i=0; i<N; i++) cout<<arr[i].x <<" "<<arr[i].y<<"\n";
 }
