@@ -1,50 +1,43 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
+
+int makeNumber(long long cnt, long long num)
+{
+    if (cnt == 0)
+        return num;
+    else
+        return makeNumber(cnt - 1, num * 10);
+}
+
+int getGCD(long long A, long long B)
+{
+    if (A % B == 0)
+        return B;
+    else
+        return getGCD(B, A % B);
+}
 
 int main()
 {
-    long long A1, B1, tmp1;
-    long long A2, B2, tmp2, res;
-    scanf("%lld %lld",&A1,&B1);
+    long long cntA, cntB;
+    long long A, B, tmp;
+    A = 0;
+    B = 0;
+    scanf("%lld %lld", &cntA, &cntB);
 
-    if(A1<B1)
+    while(cntA--)
     {
-        tmp2 = A1;
-        A1 = B1;
-        B1 = tmp2;
+        tmp = makeNumber(cntA, 1);
+        A = A+tmp;
     }
 
-    A2 = 0;
-    B2 = 0;
-    tmp1 = 1;
+    while(cntB--)
+    {
+        tmp = makeNumber(cntB, 1);
+        B = B+tmp;
+    }
 
-    for (long long i = A1; i > 0; i--)
-    {
-        tmp1 = 1;
-        for (long long j = i - 1; j >= 0; j--)
-        {
-            if(j==0) tmp1 = tmp1 * 1;
-            else tmp1 = tmp1 * 10;
-        }
-        A2 += tmp1;
-    }
-    tmp1 = 1;
-    for (long long i = B1; i > 0; i--)
-    {
-        tmp1 = 1;
-        for (long long j = i - 1; j >= 0; j--)
-        {
-            if(j==0) tmp1 = tmp1 * 1;
-            else tmp1 = tmp1 * 10;
-        }
-        B2 += tmp1;
-    }
-    while(B2!=0)
-    {
-        res = A2 % B2;
-        A2 = B2;
-        B2 = res;
-    }
-    
-    printf("%lld",A2);
+    //printf("%d %d", A, B);
+    long long result = getGCD(A,B);
+    printf("%lld", result);
 }

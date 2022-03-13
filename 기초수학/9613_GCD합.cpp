@@ -31,5 +31,6 @@ int main()
             }
         }
         printf("%lld\n",GCD);
+        delete[] arr;
     }
 }
