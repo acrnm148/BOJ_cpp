@@ -1,0 +1,63 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int world[51][51];
+int visited[51][51];
+int dirX[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
+int dirY[8] = {1, 1, 1, 0, 0, -1, -1, -1};
+int w, h, cnt;
+
+void DFS(int i, int j)
+{
+    visited[i][j] = 1;
+    for (int k = 0; k < 8; k++)
+    {
+        int i_ = i + dirY[k];
+        int j_ = j + dirX[k];
+        if (!(i_ == 0 || i_ > h || j_ == 0 || j > w))
+        {
+            if (world[i_][j_] == 1 && visited[i_][j_] == 0)
+            {
+                visited[i_][j_] = 1;
+                DFS(i_, j_);
+            }
+        }
+    }
+}
+
+int main()
+{
+    int num;
+    cin >> w >> h;
+    while (!(w == 0 && h == 0))
+    {
+        cnt = 0;
+        for (int i = 1; i <= h; i++)
+        {
+            for (int j = 1; j <= w; j++)
+            {
+                cin >> num;
+                world[i][j] = num;
+            }
+        }
+
+        for (int i = 1; i <= h; i++)
+        {
+            for (int j = 1; j <= w; j++)
+            {
+                if (visited[i][j] == 0 && world[i][j] == 1)
+                {
+                    cnt++;
+                    DFS(i, j);
+                }
+            }
+        }
+
+        cout << cnt << "\n";
+
+        memset(world, 0, sizeof(world));
+        memset(visited, 0, sizeof(visited));
+        cin >> w >> h;
+    }
+}
