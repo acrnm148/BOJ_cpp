@@ -32,7 +32,7 @@ int main()
         vect[v].push_back(u); //무방향 그래프이기 때문
     }
 
-    for (int i = 1; i <= N; i++) //인접리스트를 쓰면 DFS를 N번 실행해줘야 함
+    for (int i = 1; i <= N; i++) //빠짐없이 탐색하기 위해
     {
         if (visited[i] == 0)
         {
